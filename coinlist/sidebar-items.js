@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["ChainID","ID of a chain supporting coins."]],"struct":[["CoinExtensions","Extra information about a coin."],["CoinInfo","Coin information."],["CoinList","A list of coins."],["TagDetails","Details about what a tag is."],["Version","Semver version of the coin list."]]});
