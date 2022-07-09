@@ -1,0 +1,10 @@
+.aptos/
+build/
+generated/
+
+# Added by cargo
+
+/target
+
+*.bpl
+/.direnv

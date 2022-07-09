@@ -1,0 +1,26 @@
+[package]
+name = "coinlist"
+version = "0.1.0"
+description = "Parses lists of coins."
+homepage = "https://moving.wtf"
+repository = "https://github.com/movingco/coinlist"
+authors = ["Ian Macalinao <ian@moving.wtf>"]
+license = "Apache-2.0"
+edition = "2021"
+keywords = ["move", "diem", "token"]
+
+[lib]
+name = "coinlist"
+path = "src/lib.rs"
+
+[features]
+default = []
+address20 = ["struct-tag/address20"]
+address32 = ["struct-tag/address32"]
+
+[dependencies]
+struct-tag = "0.1.5"
+chrono = { version = "0.4", features = ["serde"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0.79"
+url = { version = "^2.2", features = ["serde"] }
