@@ -1,5 +1,5 @@
 [![Crates.io](https://img.shields.io/crates/v/coinlist.svg)](https://crates.io/crates/coinlist)
-[![Workflow Status](https://github.com/movingco/coinlist/workflows/rust/badge.svg)](https://github.com/movingco/coinlist/actions?query=workflow%3A%22rust%22)
+[![Workflow Status](https://github.com/movingco/coinlist/workflows/Rust/badge.svg)](https://github.com/movingco/coinlist/actions?query=workflow%3A%22Rust%22)
 
 # coinlist
 
