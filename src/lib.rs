@@ -1,8 +1,4 @@
 //! Parses coin lists according to the coin list standard.
-//!
-//! # License
-//!
-//! The `coinlist` crate is licensed under the Apache 2.0 License.
 #![deny(missing_docs)]
 
 use chrono::{DateTime, Utc};

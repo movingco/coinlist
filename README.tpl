@@ -1,9 +1,9 @@
 [![Crates.io](https://img.shields.io/crates/v/coinlist.svg)](https://crates.io/crates/coinlist)
-[![Workflow Status](https://github.com/movingco/coinlist/workflows/main/badge.svg)](https://github.com/movingco/coinlist/actions?query=workflow%3A%22main%22)
+{{badges}}
 
-# coinlist
+# {{crate}}
 
-Parses coin lists according to the coin list standard.
+{{readme}}
 
 ## License
 
