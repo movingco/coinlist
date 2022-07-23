@@ -2,23 +2,15 @@
 #![deny(missing_docs)]
 
 use chrono::{DateTime, Utc};
-use serde::{Deserialize, Deserializer, Serialize};
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::collections::BTreeMap;
 use struct_tag::StructTagData;
 use url::Url;
 
-fn ok_or_default<'a, T, D>(deserializer: D) -> Result<T, D::Error>
-where
-    T: Deserialize<'a> + Default,
-    D: Deserializer<'a>,
-{
-    let v: Value = Deserialize::deserialize(deserializer)?;
-    Ok(T::deserialize(v).unwrap_or_default())
-}
-
 /// ID of a chain supporting coins.
-#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, JsonSchema, Serialize, Deserialize)]
 #[repr(u32)]
 pub enum ChainID {
     /// Aptos mainnet.
@@ -32,7 +24,7 @@ pub enum ChainID {
 }
 
 /// Extra information about a coin.
-#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, JsonSchema, Serialize, Deserialize)]
 pub struct CoinExtensions {
     /// Website.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -100,7 +92,7 @@ pub struct CoinExtensions {
 }
 
 /// Coin information.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, JsonSchema, Serialize, Deserialize)]
 pub struct CoinInfo {
     /// Name of the coin.
     pub name: String,
@@ -108,12 +100,7 @@ pub struct CoinInfo {
     pub symbol: String,
     /// Logo of the coin. Highly recommended.
     /// If the provided logo is invalid, this value is discarded.
-    #[serde(
-        deserialize_with = "ok_or_default",
-        default = "Option::default",
-        skip_serializing_if = "Option::is_none",
-        rename = "logoURI"
-    )]
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "logoURI")]
     pub logo_uri: Option<Url>,
     /// Number of decimals of the coin.
     pub decimals: u8,
@@ -123,10 +110,10 @@ pub struct CoinInfo {
     #[serde(rename = "chainId")]
     pub chain_id: u32,
     /// Tags of the coin.
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub tags: Option<Vec<String>>,
     /// Coin extensions.
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub extensions: Option<CoinExtensions>,
 }
 
@@ -164,7 +151,7 @@ impl CoinInfo {
 }
 
 /// Details about what a tag is.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, JsonSchema, Serialize, Deserialize)]
 pub struct TagDetails {
     /// Name of the tag.
     pub name: String,
@@ -173,7 +160,7 @@ pub struct TagDetails {
 }
 
 /// Semver version of the coin list.
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, JsonSchema, Serialize, Deserialize)]
 pub struct Version {
     /// Major version.
     pub major: u32,
@@ -184,12 +171,12 @@ pub struct Version {
 }
 
 /// A list of coins.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, JsonSchema, Serialize, Deserialize)]
 pub struct CoinList {
     /// Name of the coin list.
     pub name: String,
     /// Logo URI of the coin list.
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub logo_uri: Option<Url>,
     /// All tags that may be referenced in the coin list.
     pub tags: BTreeMap<String, TagDetails>,
