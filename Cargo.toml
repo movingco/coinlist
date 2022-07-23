@@ -1,6 +1,6 @@
 [package]
 name = "coinlist"
-version = "0.1.0"
+version = "0.2.0"
 description = "Parses lists of coins."
 homepage = "https://moving.wtf"
 repository = "https://github.com/movingco/coinlist"
